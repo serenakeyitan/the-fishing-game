@@ -63,6 +63,8 @@ function App() {
   
   const handleFishing = (newCatch) => {
     console.log("handleFishing called with newCatch:", newCatch);
+    const preventScroll = () => window.scrollTo(0, window.scrollY);
+    window.addEventListener('scroll', preventScroll);
   
     // Determine fish rarity based on newCatch
     const fishRarity = calculateRarestFish(newCatch); // Assume this returns a string like 'common', 'uncommon', etc.
@@ -122,6 +124,10 @@ function App() {
       fishPool: updatedFishPool,
       inventory: updatedInventory,
     });
+
+    setTimeout(() => {
+      window.removeEventListener('scroll', preventScroll);
+  }, 100);
   };
   
   const distributeRewards = () => {

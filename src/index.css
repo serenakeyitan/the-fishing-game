@@ -322,3 +322,67 @@ select {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+
+/* Sticky score and countdown */
+.score-countdown-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding: 10px;
+  position: sticky;
+  top: 60px; /* Adjust the top position to ensure it doesn't overlap the title */
+  background-color: #fff;
+  z-index: 10;
+}
+
+/* Ensure title has enough space */
+.round-counter {
+  margin-top: 20px; /* Provide enough margin to prevent overlap with sticky elements */
+  text-align: center;
+}
+
+/* Container for everything */
+.container {
+  padding-top: 20px; /* Add padding to ensure nothing is cut off at the top */
+  max-height: 100vh;
+  overflow-y: auto;
+}
+h1.round-counter, h1.title {
+  margin: 0;
+  padding: 20px 0;
+  text-align: center;
+  background-color: #fff;
+  z-index: 5; /* Ensure it layers correctly with sticky elements */
+  position: relative;
+}
+/* Ensure title has enough space and is not affected by new content */
+.title-container {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* Ensure proper space at the top of the container */
+.container {
+  padding-top: 80px; /* Enough padding to ensure title visibility */
+  max-height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth; /* Ensure smooth scrolling */
+}
+
+/* Sticky score and countdown */
+.score-countdown-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding: 10px;
+  position: sticky;
+  top: 80px; /* Match the top padding to prevent overlap */
+  background-color: #fff;
+  z-index: 10;
+}
+
