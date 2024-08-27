@@ -58,38 +58,64 @@ function App() {
     setIpBalance((prevBalance) => prevBalance - 1);
   };
 
+  const [caughtFish, setCaughtFish] = useState(null);
+  const [caughtFishRarity, setCaughtFishRarity] = useState(null);
+  
   const handleFishing = (newCatch) => {
     console.log("handleFishing called with newCatch:", newCatch);
-
+  
+    // Determine fish rarity based on newCatch
+    const fishRarity = calculateRarestFish(newCatch); // Assume this returns a string like 'common', 'uncommon', etc.
+  
+    // Set the caught fish and its rarity
+    setCaughtFish(newCatch);
+    setCaughtFishRarity(fishRarity);
+  
     // Update the balances before setting the state
     const updatedIpBalance = ipBalance - 1;
     const updatedFishPool = fishPool + 1;
-
+  
     // Update the inventory with the new catch
     const updatedInventory = { ...inventory, [newCatch]: (inventory[newCatch] || 0) + 1 };
-
+  
     // Decrement the selected bait quantity in the inventory
     if (updatedInventory[selectedBait] > 1) {
       updatedInventory[selectedBait] -= 1;
     } else {
       delete updatedInventory[selectedBait];
     }
-
+  
     // Calculate the score based on the new catch only
     const newScore = calculateRarestFish(newCatch);
-
+  
     // Update the total score by adding the newScore
-    setScore((prevScore) => {
-      const updatedScore = prevScore + newScore;
-      console.log(`Updated Total Score: ${updatedScore}`);
-      return updatedScore;
-    });
-
+    setScore((prevScore) => prevScore + newScore);
+  
+    // Define the target score range
+    const targetMinScore = 5;
+    const targetMaxScore = 6;
+  
+    // Log the current score and target range
+    console.log(`Caught Fish Rarity Score: ${newScore}`);
+    console.log(`Current Total Score: ${score}`);
+    console.log(`Target Score Range: ${targetMinScore} - ${targetMaxScore}`);
+  
+    // Check if the round has ended (distributionTimer is 0)
+    if (distributionTimer === 0) {
+      if (score >= targetMinScore && score <= targetMaxScore) {
+        const additionalFish = Math.floor(Math.random() * 11) + 18; // Random number between 18 and 28
+        setFishBalance((prevBalance) => prevBalance + additionalFish);
+        setWonTokens(additionalFish);  // Set the number of won tokens
+        setAnimate(true);  // Trigger the animation
+        console.log(`End of Round: Score is ${score}. Added ${additionalFish} FISH tokens to the balance.`);
+      }
+    }
+  
     // Set the updated state locally
     setIpBalance(updatedIpBalance);
     setFishPool(updatedFishPool);
     setInventory(updatedInventory);
-
+  
     console.log("handleFishing - Updated state:", {
       ipBalance: updatedIpBalance,
       fishBalance: fishBalance,
@@ -97,7 +123,7 @@ function App() {
       inventory: updatedInventory,
     });
   };
-
+  
   const distributeRewards = () => {
     // Define the target score range
     const targetMinScore = 5;
@@ -161,6 +187,13 @@ function App() {
       {animate && (
         <div className="token-animation">+{wonTokens} FISH</div>
       )}
+
+      {caughtFish && (
+        <div className="caught-fish-message">
+          You caught a <span className={`caught-fish ${caughtFishRarity} animate`}>{caughtFish} fish!</span>
+        </div>
+      )}
+
       <FishingSection
         inventory={inventory}
         setInventory={setInventory}
@@ -179,8 +212,6 @@ function App() {
       {/* <DollarRain /> */}
     </div>
   );
-  
-  
 }
 
 function generatePlayerId() {

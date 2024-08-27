@@ -214,3 +214,98 @@ select {
     color: #ff4500;
   }
 }
+
+.caught-fish-message {
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+.caught-fish {
+  font-weight: bold;
+  display: inline-block;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.common {
+  color: gray;
+}
+
+.uncommon {
+  color: green;
+}
+
+.rare {
+  color: blue;
+}
+
+.superRare {
+  color: purple;
+}
+
+.epic {
+  color: orange;
+}
+
+.legendary {
+  color: red;
+}
+
+.mythical {
+  color: gold;
+}
+
+.animate {
+  animation: popAndFlash 0.8s ease;
+}
+
+@keyframes popAndFlash {
+  0% {
+    transform: scale(1);
+    color: inherit;
+  }
+  50% {
+    transform: scale(1.5); /* Sudden enlargement */
+    color: white; /* Flash color */
+  }
+  100% {
+    transform: scale(1);
+    color: inherit; /* Return to original color */
+  }
+}
+
+.score-countdown-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.score-box, .countdown-box {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2em;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.score-number, .countdown-number {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.flash {
+  animation: flashCountdown 1s infinite;
+}
+
+@keyframes flashCountdown {
+  0%, 100% {
+    color: red;
+    transform: scale(1);
+  }
+  50% {
+    color: white;
+    transform: scale(1.2);
+  }
+}
