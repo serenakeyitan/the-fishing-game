@@ -138,3 +138,79 @@ select {
   color: #333;
 }
 
+
+@keyframes rewardAnimation {
+  0% {
+    transform: scale(1);
+    color: red;
+  }
+  50% {
+    transform: scale(2.5); /* Enlarged size */
+    color: red;
+  }
+  100% {
+    transform: scale(1);
+    color: red;
+  }
+}
+
+.token-animation {
+  font-size: 2em;
+  animation: rewardAnimation 1s ease-in-out;
+  color: red;
+  font-weight: bold;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hint-box {
+  background-color: #e0f7fa;
+  border: 1px solid #b2ebf2;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.1em;
+  color: #00796b;
+}
+
+
+.score-countdown-container {
+  display: flex;
+  justify-content: center; /* Center align the boxes */
+  gap: 10px; /* Add a small gap between the boxes */
+  margin-top: 20px;
+}
+
+.score-box, .countdown-box {
+  width: 35%; /* Keep the reduced width */
+  padding: 10px; /* Keep the reduced padding */
+  border: 2px solid #00796b;
+  border-radius: 10px;
+  background-color: #e0f7fa;
+  text-align: center;
+}
+
+.score-number, .countdown-number {
+  font-size: 3em;
+  font-weight: bold;
+  color: #00796b;
+  margin: 0;
+}
+
+.flash .countdown-number {
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0%, 100% {
+    transform: scale(1);
+    color: red;
+  }
+  50% {
+    transform: scale(1.5);
+    color: #ff4500;
+  }
+}

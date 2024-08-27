@@ -130,10 +130,13 @@ function App() {
   return (
     <div className="container">
       <h1 className="round-counter">ROUND {round}</h1>
-      <h1>Fishing Expedition with Bait</h1>
-      <div className="notice">
-        <strong>Top 15% of players who fish with the highest rarity score</strong> will get all the $FISH tokens of that round split! 
-        <em>RarityScore will reset every round!</em>
+      <h1>🎣 Bet the F#cking Hook 🎣</h1>
+      <div className="hint-box">
+        <strong>Top 15% of fishers</strong> will get ALL the $FISH tokens of that round split! Score resets every round!
+      </div>
+      <div className="fomo-message">
+        <p>🔥 Can't stop, won't stop! Are you the next fish lord? 🔥</p>
+        <p>🎉 Catch rare fish, stack $FISH, and flex on your fellow degens! 🚀</p>
       </div>
       <div className="faucets">
         <button onClick={claimIpToken}>Claim 1 $IP Token</button>
@@ -141,8 +144,19 @@ function App() {
       </div>
       <p>Your $IP Balance: {ipBalance}</p>
       <p>Your $FISH Balance: {fishBalance}</p>
-      <p>Your Current Score: {score}</p>
-      <p>Next Distribution in: {distributionTimer} seconds</p>
+  
+      {/* New score and countdown boxes */}
+      <div className="score-countdown-container">
+        <div className="score-box">
+          <p>Current Score</p>
+          <p className="score-number">{score}</p>
+        </div>
+        <div className={`countdown-box ${distributionTimer <= 5 ? 'flash' : ''}`}>
+          <p>Next Distribution In:</p>
+          <p className="countdown-number">{distributionTimer}</p>
+        </div>
+      </div>
+  
       {animate && (
         <div className="token-animation">+{wonTokens} FISH</div>
       )}
@@ -163,6 +177,8 @@ function App() {
       <ProbabilityWindow selectedBait={selectedBait} isOpen={probabilityStatus} />
     </div>
   );
+  
+  
 }
 
 function generatePlayerId() {
