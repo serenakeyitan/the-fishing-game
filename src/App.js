@@ -3,6 +3,7 @@ import FishingSection from './components/FishingSection';
 import InventorySection from './components/InventorySection';
 import ProbabilityWindow from './components/ProbabilityWindow';
 import './index.css';
+// import DollarRain from './components/DollarRain';
 
 function App() {
   const [inventory, setInventory] = useState({});
@@ -100,7 +101,7 @@ function App() {
   const distributeRewards = () => {
     // Define the target score range
     const targetMinScore = 5;
-    const targetMaxScore = 6;
+    const targetMaxScore = 8;
 
     // Generate a random score within the target range
     const randomTargetScore = Math.floor(Math.random() * (targetMaxScore - targetMinScore + 1)) + targetMinScore;
@@ -175,6 +176,7 @@ function App() {
       />
       <InventorySection inventory={inventory} setSelectedBait={setSelectedBait} />
       <ProbabilityWindow selectedBait={selectedBait} isOpen={probabilityStatus} />
+      {/* <DollarRain /> */}
     </div>
   );
   
