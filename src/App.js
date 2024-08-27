@@ -128,7 +128,7 @@ function App() {
     // Define the target score range
     const targetMinScore = 5;
     const targetMaxScore = 8;
-
+  
     // Generate a random score within the target range
     const randomTargetScore = Math.floor(Math.random() * (targetMaxScore - targetMinScore + 1)) + targetMinScore;
     console.log(`Random Target Score for Rewards: ${randomTargetScore}`);
@@ -136,14 +136,28 @@ function App() {
     // Check if the current score meets or exceeds the random target score
     if (score >= randomTargetScore) {
       const additionalFish = Math.floor(Math.random() * 11) + 18; // Random number between 18 and 28
-      setFishBalance((prevBalance) => prevBalance + additionalFish);
-      setWonTokens(additionalFish);  // Set the number of won tokens
-      setAnimate(true);  // Trigger the animation
+      
+      // Log the previous balance
+      console.log(`Previous Fish Balance: ${fishBalance}`);
+      
+      // Update the balance first
+      setFishBalance((prevBalance) => {
+        const newBalance = prevBalance + additionalFish;
+        console.log(`New Fish Balance after adding ${additionalFish}: ${newBalance}`);
+        return newBalance;
+      });
+      
+      // Set the number of won tokens for animation
+      setWonTokens(additionalFish);
+      
+      // Trigger the animation
+      setAnimate(true);
       console.log(`Reward distributed: ${additionalFish} FISH tokens.`);
     } else {
       console.log("No reward distributed this round.");
     }
   };
+  
 
   useEffect(() => {
     if (animate) {
@@ -169,8 +183,12 @@ function App() {
         <button onClick={claimIpToken}>Claim 1 $IP Token</button>
         <button onClick={claimFishToken}>Swap 1 $FISH Token</button>
       </div>
-      <p>Your $IP Balance: {ipBalance}</p>
-      <p>Your $FISH Balance: {fishBalance}</p>
+      
+      {/* Flex container for balances */}
+      <div className="balance-container">
+        <p>Your $IP Balance: {ipBalance}</p>
+        <p>Your $FISH Balance: {fishBalance}</p>
+      </div>
   
       {/* New score and countdown boxes */}
       <div className="score-countdown-container">
@@ -187,13 +205,13 @@ function App() {
       {animate && (
         <div className="token-animation">+{wonTokens} FISH</div>
       )}
-
+  
       {caughtFish && (
         <div className="caught-fish-message">
           You caught a <span className={`caught-fish ${caughtFishRarity} animate`}>{caughtFish} fish!</span>
         </div>
       )}
-
+  
       <FishingSection
         inventory={inventory}
         setInventory={setInventory}
@@ -212,7 +230,7 @@ function App() {
       {/* <DollarRain /> */}
     </div>
   );
-}
+}  
 
 function generatePlayerId() {
   return `player_${Math.random().toString(36).substr(2, 9)}`;

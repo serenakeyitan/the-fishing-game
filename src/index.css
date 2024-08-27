@@ -309,3 +309,16 @@ select {
     transform: scale(1.2);
   }
 }
+
+.balance-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.balance-container p {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
